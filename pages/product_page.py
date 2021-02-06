@@ -23,3 +23,11 @@ class ProductPage(BasePage):
         alert_price = self.browser.find_element(*ProductPageLocators.ALERT_PRICE_BASKET).text
         price_product = self.browser.find_element(*ProductPageLocators.PRICE_PRODUCT).text.split(" ")[0]
         assert price_product in alert_price, "Price is not right"
+
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(
+            *ProductPageLocators.ALERT_ADDING_PRODUCT), "Success message is presented, but should not be"
+
+    def should_be_disappeared_success_message(self):
+        assert self.is_disappeared(
+            *ProductPageLocators.ALERT_ADDING_PRODUCT), "Success message is not disappeared"
